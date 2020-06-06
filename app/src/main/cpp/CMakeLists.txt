@@ -25,7 +25,7 @@ add_library( # Sets the name of the library.
         Render.cpp
         JNIHelper.cpp
         MainActivity.cpp
-        TriangleSample.cpp
+        BackGround.cpp
         ShaderHelper.cpp
         )
 

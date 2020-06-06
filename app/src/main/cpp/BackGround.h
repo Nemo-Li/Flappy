@@ -2,17 +2,17 @@
 // Created by Nemo li on 2020/6/5.
 //
 
-#ifndef FLAPPY_TRIANGLESAMPLE_H
-#define FLAPPY_TRIANGLESAMPLE_H
+#ifndef FLAPPY_BACKGROUND_H
+#define FLAPPY_BACKGROUND_H
 
 #include <GLES3/gl32.h>
 #include "JNIHelper.h"
 
-class TriangleSample {
+class BackGround {
 public:
-    TriangleSample();
+    BackGround();
 
-    virtual ~TriangleSample();
+    virtual ~BackGround();
 
     virtual void Init();
 
@@ -32,4 +32,4 @@ protected:
 
 extern JNIHelper *jniHelper;
 
-#endif //FLAPPY_TRIANGLESAMPLE_H
+#endif //FLAPPY_BACKGROUND_H

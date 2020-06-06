@@ -2,17 +2,17 @@
 // Created by Nemo li on 2020/6/5.
 //
 
-#include "TriangleSample.h"
+#include "BackGround.h"
 #include "ShaderHelper.h"
 #include "CLogger.h"
 #include "stb_image.h"
 #include <fstream>
 
-TriangleSample::TriangleSample() = default;
+BackGround::BackGround() = default;
 
-TriangleSample::~TriangleSample() = default;
+BackGround::~BackGround() = default;
 
-void TriangleSample::Init() {
+void BackGround::Init() {
     string vertexShaderCode;
     string vertexFile = string("shaders/triangle.vert");
     if (!readShaderCode(vertexShaderCode, vertexFile)) {
@@ -32,12 +32,12 @@ void TriangleSample::Init() {
                                                m_FragmentShader);
 
     GLfloat vertices[] = {
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f
+            1.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+            1.0f, 1.0f, 0.0f, 1.0f, 0.0f
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -70,7 +70,7 @@ void TriangleSample::Init() {
     stbi_image_free(image);
 }
 
-void TriangleSample::Draw() {
+void BackGround::Draw() {
     if (m_ProgramObj == 0) {
         return;
     }
@@ -85,7 +85,7 @@ void TriangleSample::Draw() {
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-void TriangleSample::Destroy() {
+void BackGround::Destroy() {
     if (m_ProgramObj) {
         glDeleteProgram(m_ProgramObj);
         m_ProgramObj = GL_NONE;
@@ -95,7 +95,7 @@ void TriangleSample::Destroy() {
 /**
  * Read the shader code from assets
  */
-bool TriangleSample::readShaderCode(string &shaderCode, string &shaderFileName) {
+bool BackGround::readShaderCode(string &shaderCode, string &shaderFileName) {
 
     CLOGI("Reading shader: %s", shaderFileName.c_str());
 
