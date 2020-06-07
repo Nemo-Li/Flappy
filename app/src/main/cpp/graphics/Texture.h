@@ -13,6 +13,8 @@ using namespace std;
 
 class Texture {
 public:
+    Texture();
+
     Texture(string path);
 
     virtual ~Texture();

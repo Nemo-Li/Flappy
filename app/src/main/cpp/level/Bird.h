@@ -15,8 +15,8 @@
 class Bird {
 private:
     float size = 1.0f;
-    VertexArray mesh = VertexArray(0);
-    Texture texture = Texture("");
+    VertexArray mesh;
+    Texture texture;
     glm::vec3 position;
     float rot = 0.0f;
     float delta = 0.0f;

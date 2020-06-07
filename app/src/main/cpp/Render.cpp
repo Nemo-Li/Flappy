@@ -45,17 +45,17 @@ void Render::performGLInit() {
 //                                     -1.0f, 1.0f);
 
     glm::mat4 pr_matrix = glm::mat4(1.0f);
-    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
-    Shader::BG.setUniform1i("tex", 1);
+//    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
+//    Shader::BG.setUniform1i("tex", 1);
 
-//    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
-//    Shader::BIRD.setUniform1i("tex", 1);
+    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
+    Shader::BIRD.setUniform1i("tex", 1);
 
 //    Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
 //    Shader::PIPE.setUniform1i("tex", 1);
 
 //    level = Level();
-//    bird = Bird();
+    Bird bird = Bird();
     checkGLError("MyGLInit");
 }
 

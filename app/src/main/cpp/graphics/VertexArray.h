@@ -12,6 +12,8 @@ private:
     GLuint vao, vbo, ibo, tbo;
     int count;
 public:
+    VertexArray();
+
     VertexArray(int count);
 
     VertexArray(float vertices[], int indices[], float textureCoordinates[]);

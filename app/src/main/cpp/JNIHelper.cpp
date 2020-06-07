@@ -98,5 +98,6 @@ unsigned char *JNIHelper::ExtractAssetImage(string assetName) {
     off_t assetLength = AAsset_getLength(asset);
     auto *fileData = (unsigned char *) AAsset_getBuffer(asset);
     unsigned char *image = stbi_load_from_memory(fileData, assetLength, &imageW, &imageH, &n, 0);
+    CLOGD("加载图片成功");
     return image;
 }

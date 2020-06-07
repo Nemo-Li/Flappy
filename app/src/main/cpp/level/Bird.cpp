@@ -3,7 +3,6 @@
 //
 
 #include "Bird.h"
-#include "../input/Input.h"
 #include "gtc/matrix_transform.hpp"
 
 Bird::Bird() {
@@ -26,20 +25,20 @@ Bird::Bird() {
             1, 1
     };
 
-//    texture = Texture("res/bird.png");
-//    mesh = VertexArray(vertices, indices, tcs);
+    Bird::texture = Texture("bird.png");
+    mesh = VertexArray(vertices, indices, tcs);
 }
 
 Bird::~Bird() = default;
 
 void Bird::update() {
-    position.y -= delta;
-    if (actionDown) {
-        delta = -0.15;
-    } else {
-        delta += 0.01f;
-    }
-    rot = -delta * 90.0f;
+//    position.y -= delta;
+//    if (actionDown) {
+//        delta = -0.15;
+//    } else {
+//        delta += 0.01f;
+//    }
+//    rot = -delta * 90.0f;
 }
 
 void Bird::fall() {

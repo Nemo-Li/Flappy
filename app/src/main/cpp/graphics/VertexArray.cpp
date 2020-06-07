@@ -66,3 +66,7 @@ void VertexArray::render() {
     draw();
 }
 
+VertexArray::VertexArray() {
+
+}
+

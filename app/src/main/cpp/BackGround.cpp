@@ -62,7 +62,7 @@ void BackGround::Init() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     // load the OpenCV Mat into GLES
 
-    unsigned char *image = jniHelper->ExtractAssetImage("res/bg.jpeg");
+    unsigned char *image = jniHelper->ExtractAssetImage("bg.jpeg");
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, jniHelper->imageW,
                  jniHelper->imageH, 0, GL_RGB, GL_UNSIGNED_BYTE,

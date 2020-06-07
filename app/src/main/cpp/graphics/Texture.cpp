@@ -4,8 +4,14 @@
 
 #include <GLES3/gl32.h>
 #include "Texture.h"
+#include "../CLogger.h"
+
+Texture::Texture() {
+
+}
 
 Texture::Texture(string path) {
+    CLOGD("加载图片%s", path.c_str());
     unsigned char *image = jniHelper->ExtractAssetImage(path);
 
     glGenTextures(1, &texture);
