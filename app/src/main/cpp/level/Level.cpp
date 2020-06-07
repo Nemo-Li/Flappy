@@ -42,13 +42,13 @@ void Level::render() {
     background.bind();
     background.draw();
 
-//    for (int i = map; i < map + 4; i++) {
-//        glm::mat4 trans = glm::mat4(1.0f);
-//        Shader::BG.setUniformMat4f("vw_matrix",
-//                                   glm::translate(trans,
-//                                                  glm::vec3(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
-//        background.draw();
-//    }
+    for (int i = map; i < map + 4; i++) {
+        glm::mat4 trans = glm::mat4(1.0f);
+        Shader::BG.setUniformMat4f("vw_matrix",
+                                   glm::translate(trans,
+                                                  glm::vec3(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
+        background.draw();
+    }
     Shader::BG.disable();
     bgTexture.unbind();
 

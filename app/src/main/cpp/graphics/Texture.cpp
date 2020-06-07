@@ -25,8 +25,8 @@ Texture::Texture(string path, bool png) {
 
     unsigned char *image = jniHelper->ExtractAssetImage(path);
     if (png) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, jniHelper->imageW,
-                     jniHelper->imageH, 0, GL_RGB, GL_UNSIGNED_BYTE,
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, jniHelper->imageW,
+                     jniHelper->imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE,
                      image);
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, jniHelper->imageW,
