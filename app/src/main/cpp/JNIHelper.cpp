@@ -3,6 +3,7 @@
 //
 
 #define STB_IMAGE_IMPLEMENTATION
+
 #include "JNIHelper.h"
 #include <android/asset_manager_jni.h>
 #include "CLogger.h"
@@ -95,7 +96,7 @@ unsigned char *JNIHelper::ExtractAssetImage(string assetName) {
     // Open file
     AAsset *asset = AAssetManager_open(apkAssetManager, assetName.c_str(), AASSET_MODE_STREAMING);
     off_t assetLength = AAsset_getLength(asset);
-    unsigned char *fileData = (unsigned char *) AAsset_getBuffer(asset);
+    auto *fileData = (unsigned char *) AAsset_getBuffer(asset);
     unsigned char *image = stbi_load_from_memory(fileData, assetLength, &imageW, &imageH, &n, 0);
     return image;
 }

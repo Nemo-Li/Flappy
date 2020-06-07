@@ -11,6 +11,7 @@
 #include <EGL/eglext.h>
 #include "CLogger.h"
 #include "JNIHelper.h"
+#include "level/Level.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ public:
     void setViewport(int width, int height);
 
     void checkGLError(string funcName);
+
+    void render();
 };
 
 extern JNIHelper *jniHelper;

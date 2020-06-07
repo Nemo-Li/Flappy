@@ -7,8 +7,6 @@
 //
 
 Render pRender;
-BackGround backGround;
-
 
 extern "C"
 JNIEXPORT void JNICALL
@@ -21,13 +19,11 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_nemoli_flappy_FlappyRender_surfaceCreatedNative(JNIEnv *env, jobject thiz) {
     pRender = Render();
-    backGround = BackGround();
-    backGround.Init();
     pRender.performGLInit();
 }
 
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_nemoli_flappy_FlappyRender_drawFrameNative(JNIEnv *env, jobject thiz) {
-    backGround.Draw();
+//    pRender.render();
 }

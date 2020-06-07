@@ -5,7 +5,7 @@
 #include "ShaderHelper.h"
 #include <cstring>
 #include "CLogger.h"
-#include <GLES2/gl2ext.h>
+#include <GLES3/gl32.h>
 
 GLuint ShaderHelper::LoadShader(GLenum shaderType, const char *pSource) {
     GLuint shader = 0;

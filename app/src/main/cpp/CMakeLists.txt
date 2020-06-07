@@ -21,12 +21,24 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        IFlappyRender.cpp
-        Render.cpp
+        ShaderHelper.cpp
         JNIHelper.cpp
         MainActivity.cpp
+
+        graphics/Texture.cpp
+        graphics/VertexArray.cpp
+        graphics/Shader.cpp
+        Render.cpp
+
+#        level/Level.cpp
+#        level/Pipe.cpp
+        level/Bird.cpp
+        IFlappyRender.cpp
         BackGround.cpp
-        ShaderHelper.cpp
+
+
+        #        input/Input.cpp
+
         )
 
 # Searches for a specified prebuilt library and stores the path as a

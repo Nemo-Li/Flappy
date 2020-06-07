@@ -3,12 +3,15 @@ package com.nemoli.flappy;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
 
 public class MainActivity extends Activity {
 
     private native void createObjectNative(AssetManager assetManager, String pathToInternalDir);
 
     private native void deleteObjectNative();
+
+    private native void actionDown(boolean down);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,17 @@ public class MainActivity extends Activity {
         createObjectNative(assetManager, pathToInternalDir);
 
         setContentView(R.layout.activity_main);
+    }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            actionDown(true);
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            actionDown(false);
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
