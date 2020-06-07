@@ -25,19 +25,14 @@ VertexArray::VertexArray(float *vertices, unsigned int *indices, float *textureC
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vLength, vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
-                          (void *) (3 * sizeof(float)));
+    glGenBuffers(1, &tbo);
+    glBindBuffer(GL_ARRAY_BUFFER, tbo);
+    glBufferData(GL_ARRAY_BUFFER, tLength, textureCoordinates, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
     glEnableVertexAttribArray(1);
-
-//    glGenBuffers(1, &tbo);
-//    glBindBuffer(GL_ARRAY_BUFFER, tbo);
-//    glBufferData(GL_ARRAY_BUFFER, tLength, textureCoordinates, GL_STATIC_DRAW);
-//    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
-//    glEnableVertexAttribArray(1);
 
     glGenBuffers(1, &ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
