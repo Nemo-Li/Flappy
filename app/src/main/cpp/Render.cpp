@@ -45,16 +45,14 @@ void Render::performGLInit() {
 
     glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
                                      -1.0f, 1.0f);
-
-//    glm::mat4 pr_matrix = glm::mat4(1.0f);
-//    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
-
     Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
+
+    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
 
 //    Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
 
-//    level = Level();
-    bird = new Bird();
+    level = new Level();
+//    bird = new Bird();
 
 //    background = BackGround();
     checkGLError("MyGLInit");
@@ -102,7 +100,11 @@ void Render::setViewport(int width, int height) {
 }
 
 void Render::render() {
-    bird->render();
+    glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+
+    level->render();
+//    bird->render();
 //    background.Draw();
 }
 

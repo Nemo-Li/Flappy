@@ -13,6 +13,7 @@
 #include "JNIHelper.h"
 #include "level/Bird.h"
 #include "BackGround.h"
+#include "level/Level.h"
 
 
 using namespace std;
@@ -32,8 +33,9 @@ public:
     void render();
 
 private:
-    Bird *bird;
-    BackGround background;
+    Level *level;
+//    Bird *bird;
+//    BackGround background;
 };
 
 extern JNIHelper *jniHelper;

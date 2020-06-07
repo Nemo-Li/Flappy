@@ -30,15 +30,13 @@ add_library( # Sets the name of the library.
         graphics/Shader.cpp
         Render.cpp
 
-#        level/Level.cpp
-#        level/Pipe.cpp
+        level/Level.cpp
+        level/Pipe.cpp
         level/Bird.cpp
         IFlappyRender.cpp
         BackGround.cpp
 
-
-        #        input/Input.cpp
-
+        input/Input.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

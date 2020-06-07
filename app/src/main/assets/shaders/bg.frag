@@ -1,4 +1,6 @@
-#version 300 es
+#version 310 es
+#extension GL_EXT_shader_io_blocks : enable
+precision mediump float;
 
 layout (location = 0) out vec4 color;
 

@@ -20,8 +20,8 @@ public:
     virtual ~Level();
 
 private:
-    VertexArray background = VertexArray(0), fade = VertexArray(0);
-    Texture bgTexture = Texture("");
+    VertexArray background, fade;
+    Texture bgTexture;
     Bird bird;
     int map = 0;
     int xScroll = 0;

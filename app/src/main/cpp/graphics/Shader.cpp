@@ -15,7 +15,7 @@ Shader Shader::FADE = Shader();
 GLuint Shader::id = 0;
 
 void Shader::loadAll() {
-//    BG = Shader("shaders/bg.vert", "shaders/bg.frag");
+    BG = Shader("shaders/bg.vert", "shaders/bg.frag");
     BIRD = Shader("shaders/bird.vert", "shaders/bird.frag");
 //    PIPE = Shader("shaders/pipe.vert", "shaders/pipe.frag");
 //    FADE = Shader("shaders/fade.vert", "shaders/fade.frag");

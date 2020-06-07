@@ -15,7 +15,7 @@ class Texture {
 public:
     Texture();
 
-    Texture(string path);
+    Texture(string path, bool png);
 
     virtual ~Texture();
 

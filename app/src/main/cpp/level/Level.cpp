@@ -13,7 +13,7 @@ Level::Level() {
             0.0f, -10.0f * 9.0f / 16.0f, 0.0f
     };
 
-    int indices[] = {
+    unsigned int indices[] = {
             0, 1, 2,
             2, 3, 0
     };
@@ -25,9 +25,10 @@ Level::Level() {
             1, 1
     };
 
-    fade = VertexArray(6);
-    background = VertexArray(vertices, indices, tcs);
-    bgTexture = Texture("res/bg.jpeg");
+//    fade = VertexArray(6);
+    background = VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices),
+                             sizeof(tcs));
+    bgTexture = Texture("bg.jpeg", false);
     bird = Bird();
 
 //    createPipes();
@@ -39,13 +40,15 @@ void Level::render() {
     Shader::BG.enable();
     Shader::BG.setUniform2f("bird", 0, bird.getY());
     background.bind();
-    for (int i = map; i < map + 4; i++) {
-        glm::mat4 trans = glm::mat4(1.0f);
-        Shader::BG.setUniformMat4f("vw_matrix",
-                                   glm::translate(trans,
-                                                  glm::vec3(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
-        background.draw();
-    }
+    background.draw();
+
+//    for (int i = map; i < map + 4; i++) {
+//        glm::mat4 trans = glm::mat4(1.0f);
+//        Shader::BG.setUniformMat4f("vw_matrix",
+//                                   glm::translate(trans,
+//                                                  glm::vec3(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
+//        background.draw();
+//    }
     Shader::BG.disable();
     bgTexture.unbind();
 

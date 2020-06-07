@@ -5,6 +5,7 @@
 #include "Bird.h"
 #include "gtc/matrix_transform.hpp"
 #include "../CLogger.h"
+#include "../input/Input.h"
 
 Bird::Bird() {
     float vertices[] = {
@@ -26,20 +27,20 @@ Bird::Bird() {
             1, 1
     };
 
-    texture = new Texture("bird.png");
+    texture = new Texture("bird.png", true);
     mesh = new VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices), sizeof(tcs));
 }
 
 Bird::~Bird() = default;
 
 void Bird::update() {
-//    position.y -= delta;
-//    if (actionDown) {
-//        delta = -0.15;
-//    } else {
-//        delta += 0.01f;
-//    }
-//    rot = -delta * 90.0f;
+    position.y -= delta;
+    if (actionDown) {
+        delta = -0.15;
+    } else {
+        delta += 0.01f;
+    }
+    rot = -delta * 90.0f;
 }
 
 void Bird::fall() {
@@ -48,9 +49,6 @@ void Bird::fall() {
 
 void Bird::render() {
     CLOGD("render");
-
-    glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
 
     Shader::BIRD.enable();
     CLOGD("BIRD.enable()");
