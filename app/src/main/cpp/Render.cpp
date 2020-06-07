@@ -21,9 +21,9 @@ void Render::performGLInit() {
 //    CLOGD("GLInit, clear color");
 
     // Enable depth test
-    glEnable(GL_DEPTH_TEST);
+//    glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-    glDepthFunc(GL_LEQUAL);
+//    glDepthFunc(GL_LEQUAL);
 
     CLOGI("OpenGL %s, GLSL %s", glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION));
 
@@ -37,26 +37,30 @@ void Render::performGLInit() {
 //    string shaderFile;
 //    jniHelper->ExtractAssetReturnFilename("shaders/bg.frag", shaderFile);
 
-    glActiveTexture(GL_TEXTURE1);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//    glActiveTexture(GL_TEXTURE1);
+//    glEnable(GL_BLEND);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_TEXTURE_2D);
+
     Shader::loadAll();
 
 //    glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
 //                                     -1.0f, 1.0f);
 
-    glm::mat4 pr_matrix = glm::mat4(1.0f);
+//    glm::mat4 pr_matrix = glm::mat4(1.0f);
 //    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
 //    Shader::BG.setUniform1i("tex", 1);
 
-    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
-    Shader::BIRD.setUniform1i("tex", 1);
+//    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
+//    Shader::BIRD.setUniform1i("tex", 1);
 
 //    Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
 //    Shader::PIPE.setUniform1i("tex", 1);
 
 //    level = Level();
     bird = new Bird();
+
+//    background = BackGround();
     checkGLError("MyGLInit");
 }
 
@@ -102,8 +106,7 @@ void Render::setViewport(int width, int height) {
 }
 
 void Render::render() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     bird->render();
+//    background.Draw();
 }
 

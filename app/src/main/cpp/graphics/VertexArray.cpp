@@ -12,10 +12,11 @@ VertexArray::VertexArray(int count) {
     glGenVertexArrays(1, &vao);
 }
 
-VertexArray::VertexArray(float *vertices, int *indices, float *textureCoordinates, int vLength,
+VertexArray::VertexArray(float *vertices, unsigned int *indices, float *textureCoordinates,
+                         int vLength,
                          int iLength, int tLength) {
     CLOGD("VertexArray方法");
-    VertexArray::count = iLength;
+    VertexArray::count = 6;
     CLOGD("赋值后count %d", count);
 
     glGenVertexArrays(1, &vao);
@@ -25,16 +26,18 @@ VertexArray::VertexArray(float *vertices, int *indices, float *textureCoordinate
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vLength, vertices, GL_STATIC_DRAW);
 
-    CLOGD("VERTEX_ATTRIB前");
-    glVertexAttribPointer(Shader::VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
-    glEnableVertexAttribArray(Shader::VERTEX_ATTRIB);
-    CLOGD("VERTEX_ATTRIB后");
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *) 0);
+    glEnableVertexAttribArray(0);
 
-    glGenBuffers(1, &tbo);
-    glBindBuffer(GL_ARRAY_BUFFER, tbo);
-    glBufferData(GL_ARRAY_BUFFER, tLength, textureCoordinates, GL_STATIC_DRAW);
-    glVertexAttribPointer(Shader::TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
-    glEnableVertexAttribArray(Shader::TCOORD_ATTRIB);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
+                          (void *) (3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+//    glGenBuffers(1, &tbo);
+//    glBindBuffer(GL_ARRAY_BUFFER, tbo);
+//    glBufferData(GL_ARRAY_BUFFER, tLength, textureCoordinates, GL_STATIC_DRAW);
+//    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+//    glEnableVertexAttribArray(1);
 
     glGenBuffers(1, &ibo);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
@@ -48,9 +51,10 @@ VertexArray::VertexArray(float *vertices, int *indices, float *textureCoordinate
 
 void VertexArray::bind() {
     glBindVertexArray(vao);
+    CLOGD("bind vao == %d", vao);
     if (ibo > 0) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        CLOGD("VertexArray::bind()");
+        CLOGD("VertexArray::bind ibo %d", ibo);
     }
 }
 
@@ -65,7 +69,7 @@ void VertexArray::draw() {
     if (ibo > 0) {
         CLOGD(" VertexArray::draw ibo %d", ibo);
         CLOGD(" VertexArray::draw count %d", count);
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_BYTE, 0);
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
     } else {
         CLOGD("VertexArray::bind() coung %d", count);
         glDrawArrays(GL_TRIANGLES, 0, count);
