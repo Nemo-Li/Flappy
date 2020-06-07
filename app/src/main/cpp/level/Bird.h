@@ -18,7 +18,7 @@ private:
     VertexArray *mesh;
     Texture *texture;
     glm::vec3 position;
-    float rot = 0.0f;
+    float rot = 60.0f;
     float delta = 0.0f;
 
 public:

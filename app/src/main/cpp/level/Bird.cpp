@@ -26,9 +26,6 @@ Bird::Bird() {
             1, 1
     };
 
-//    int num = sizeof(indices) / sizeof(indices[0]);
-//    CLOGD("数组长度 %d", num);
-
     texture = new Texture("bird.png");
     mesh = new VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices), sizeof(tcs));
 }
@@ -57,13 +54,13 @@ void Bird::render() {
 
     Shader::BIRD.enable();
     CLOGD("BIRD.enable()");
-//    glm::mat4 trans = glm::mat4(1.0f);
-//    Shader::BIRD.setUniformMat4f("vw_matrix", trans);
-//    CLOGD("setUniformMat4f");
+    glm::mat4 trans = glm::mat4(1.0f);
+    Shader::BIRD.setUniformMat4f("vw_matrix", trans);
 
-//    trans = glm::matrixCompMult(glm::translate(trans, position),
-//                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
-//    Shader::BIRD.setUniformMat4f("ml_matrix", trans);
+    trans = glm::matrixCompMult(glm::translate(trans, position),
+                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
+    Shader::BIRD.setUniformMat4f("ml_matrix", trans);
+
     texture->bind();
     mesh->render();
     Shader::BIRD.disable();
