@@ -29,7 +29,7 @@ Bird::Bird() {
 //    int num = sizeof(indices) / sizeof(indices[0]);
 //    CLOGD("数组长度 %d", num);
 
-    texture = new Texture("bg.jpeg");
+    texture = new Texture("bird.png");
     mesh = new VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices), sizeof(tcs));
 }
 

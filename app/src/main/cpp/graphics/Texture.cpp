@@ -24,13 +24,12 @@ Texture::Texture(string path) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     unsigned char *image = jniHelper->ExtractAssetImage(path);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, jniHelper->imageW,
-                 jniHelper->imageH, 0, GL_RGB, GL_UNSIGNED_BYTE,
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, jniHelper->imageW,
+                 jniHelper->imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE,
                  image);
 
+    glBindTexture(GL_TEXTURE_2D, 0);
     stbi_image_free(image);
-//    glBindTexture(GL_TEXTURE_2D, 0);
-//    CLOGD("创建的texture %d", texture);
 }
 
 Texture::~Texture() {
@@ -40,17 +39,6 @@ Texture::~Texture() {
 void Texture::bind() {
     glBindTexture(GL_TEXTURE_2D, texture);
     CLOGD("使用的texture %d", texture);
-//    glGenTextures(1, &texture);
-//    glBindTexture(GL_TEXTURE_2D, texture);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//
-//    unsigned char *image = jniHelper->ExtractAssetImage("bg.jpeg");
-//
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, jniHelper->imageW,
-//                 jniHelper->imageH, 0, GL_RGB, GL_UNSIGNED_BYTE,
-//                 image);
-
 }
 
 void Texture::unbind() {
