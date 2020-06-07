@@ -5,6 +5,7 @@
 #include "Render.h"
 #include "gtc/matrix_transform.hpp"
 #include "graphics/Shader.h"
+#include "level/Bird.h"
 
 Render::Render() {
 
@@ -55,7 +56,7 @@ void Render::performGLInit() {
 //    Shader::PIPE.setUniform1i("tex", 1);
 
 //    level = Level();
-    Bird bird = Bird();
+    bird = new Bird();
     checkGLError("MyGLInit");
 }
 
@@ -102,6 +103,7 @@ void Render::setViewport(int width, int height) {
 
 void Render::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    level.render();
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    bird->render();
 }
 

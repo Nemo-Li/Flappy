@@ -10,13 +10,14 @@
 class VertexArray {
 private:
     GLuint vao, vbo, ibo, tbo;
-    int count;
 public:
+    int count = 0;
+
     VertexArray();
 
     VertexArray(int count);
 
-    VertexArray(float vertices[], int indices[], float textureCoordinates[]);
+    VertexArray(float vertices[], int indices[], float textureCoordinates[], int vLength, int iLength, int tLength);
 
     void bind();
 

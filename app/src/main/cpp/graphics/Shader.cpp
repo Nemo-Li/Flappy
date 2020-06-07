@@ -79,7 +79,6 @@ bool Shader::readShaderCode(string &shaderCode, string &shaderFileName) {
 
 void Shader::enable() {
     glUseProgram(Shader::id);
-    CLOGI("glUserProgram %d", Shader::id);
     enabled = true;
 }
 

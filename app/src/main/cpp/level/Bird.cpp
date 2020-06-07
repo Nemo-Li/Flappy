@@ -4,13 +4,14 @@
 
 #include "Bird.h"
 #include "gtc/matrix_transform.hpp"
+#include "../CLogger.h"
 
 Bird::Bird() {
     float vertices[] = {
-            -size / 2.0f, -size / 2.0f, 0.2f,
-            -size / 2.0f, size / 2.0f, 0.2f,
-            size / 2.0f, size / 2.0f, 0.2f,
-            size / 2.0f, -size / 2.0f, 0.2f
+            -size / 2.0f, -size / 2.0f, 0.0f,
+            -size / 2.0f, size / 2.0f, 0.0f,
+            size / 2.0f, size / 2.0f, 0.0f,
+            size / 2.0f, -size / 2.0f, 0.0f
     };
 
     int indices[] = {
@@ -25,8 +26,11 @@ Bird::Bird() {
             1, 1
     };
 
-    Bird::texture = Texture("bird.png");
-    mesh = VertexArray(vertices, indices, tcs);
+//    int num = sizeof(indices) / sizeof(indices[0]);
+//    CLOGD("数组长度 %d", num);
+
+    texture = new Texture("bird.png");
+    mesh = new VertexArray(vertices, indices, tcs, 12, 6, 8);
 }
 
 Bird::~Bird() = default;
@@ -46,15 +50,18 @@ void Bird::fall() {
 }
 
 void Bird::render() {
+    CLOGD("render");
     Shader::BIRD.enable();
+    CLOGD("BIRD.enable()");
     glm::mat4 trans = glm::mat4(1.0f);
     Shader::BIRD.setUniformMat4f("vw_matrix", trans);
+    CLOGD("setUniformMat4f");
 
-    trans = glm::matrixCompMult(glm::translate(trans, position),
-                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
+//    trans = glm::matrixCompMult(glm::translate(trans, position),
+//                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
     Shader::BIRD.setUniformMat4f("ml_matrix", trans);
-    texture.bind();
-    mesh.render();
+    texture->bind();
+    mesh->render();
     Shader::BIRD.disable();
 }
 

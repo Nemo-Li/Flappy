@@ -25,5 +25,5 @@ Java_com_nemoli_flappy_FlappyRender_surfaceCreatedNative(JNIEnv *env, jobject th
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_nemoli_flappy_FlappyRender_drawFrameNative(JNIEnv *env, jobject thiz) {
-//    pRender.render();
+    pRender.render();
 }

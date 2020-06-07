@@ -11,7 +11,7 @@
 #include <EGL/eglext.h>
 #include "CLogger.h"
 #include "JNIHelper.h"
-#include "level/Level.h"
+#include "level/Bird.h"
 
 using namespace std;
 
@@ -28,6 +28,9 @@ public:
     void checkGLError(string funcName);
 
     void render();
+
+private:
+    Bird *bird;
 };
 
 extern JNIHelper *jniHelper;
