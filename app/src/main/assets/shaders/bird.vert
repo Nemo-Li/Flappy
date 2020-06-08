@@ -9,8 +9,10 @@ out DATA
 	vec2 tc;
 } vs_out;
 
+uniform mat4 ml_matrix;
+
 void main()
 {
-	gl_Position = position;
+	gl_Position = ml_matrix * position;
 	vs_out.tc = tc;
 }

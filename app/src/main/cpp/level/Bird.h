@@ -14,20 +14,26 @@
 
 class Bird {
 private:
-    float size = 1.0f;
+    float size = 0.2f;
     VertexArray *mesh;
     Texture *texture;
     glm::vec3 position;
-    float rot = 60.0f;
+    float rot = -45.0f;
     float delta = 0.0f;
 
 public:
     Bird();
+
     virtual ~Bird();
+
     void update();
+
     void fall();
+
     void render();
+
     float getY();
+
     float getSize();
 };
 

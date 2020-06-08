@@ -12,11 +12,11 @@ Texture::Texture() {
 }
 
 Texture::Texture(string path, bool png) {
-    CLOGD("加载图片%s", path.c_str());
+//    CLOGD("加载图片%s", path.c_str());
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    CLOGD("图片的ID为%d", texture);
+//    CLOGD("图片的ID为%d", texture);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -44,7 +44,7 @@ Texture::~Texture() {
 
 void Texture::bind() {
     glBindTexture(GL_TEXTURE_2D, texture);
-    CLOGD("使用的texture %d", texture);
+//    CLOGD("使用的texture %d", texture);
 }
 
 void Texture::unbind() {

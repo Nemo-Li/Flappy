@@ -45,7 +45,7 @@ Level::Level() {
 void Level::render() {
     bgTexture.bind();
     Shader::BG.enable();
-    Shader::BG.setUniform2f("bird", 0, bird.getY());
+//    Shader::BG.setUniform2f("bird", 0, bird.getY());
     background.bind();
     background.draw();
 

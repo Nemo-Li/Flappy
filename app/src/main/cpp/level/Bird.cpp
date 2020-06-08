@@ -48,15 +48,16 @@ void Bird::fall() {
 }
 
 void Bird::render() {
-    CLOGD("render");
+//    CLOGD("render");
 
     Shader::BIRD.enable();
-    CLOGD("BIRD.enable()");
+//    CLOGD("BIRD.enable()");
     glm::mat4 trans = glm::mat4(1.0f);
-    Shader::BIRD.setUniformMat4f("vw_matrix", trans);
+//    Shader::BIRD.setUniformMat4f("vw_matrix", trans);
+//    trans = glm::matrixCompMult(glm::translate(trans, position),
+//                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
 
-    trans = glm::matrixCompMult(glm::translate(trans, position),
-                                glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0)));
+    trans = glm::rotate(trans, glm::radians(rot), glm::vec3(0.0, 0.0, 1.0));
     Shader::BIRD.setUniformMat4f("ml_matrix", trans);
 
     texture->bind();

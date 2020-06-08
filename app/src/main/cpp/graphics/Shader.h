@@ -52,7 +52,7 @@ public:
 
 private:
     bool enabled = false;
-    static GLuint id;
+    GLuint id;
     map<string, int> locationCache;
 };
 

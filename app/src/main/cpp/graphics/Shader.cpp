@@ -12,7 +12,6 @@ Shader Shader::BG = Shader();
 Shader Shader::BIRD = Shader();
 Shader Shader::PIPE = Shader();
 Shader Shader::FADE = Shader();
-GLuint Shader::id = 0;
 
 void Shader::loadAllString() {
     string bgVert = "#version 310 es\n"
