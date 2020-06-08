@@ -45,9 +45,8 @@ Level::Level() {
 void Level::render() {
     bgTexture.bind();
     Shader::BG.enable();
-//    Shader::BG.setUniform2f("bird", 0, bird.getY());
+    Shader::BG.setUniform2f("bird", 0, bird.getY());
     background.bind();
-//    background.draw();
 
     for (int i = map; i < map + 4; i++) {
         glm::mat4 trans = glm::mat4(1.0f);

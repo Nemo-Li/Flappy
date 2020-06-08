@@ -20,6 +20,9 @@ void Shader::loadAllString() {
                     "layout (location = 0) in vec4 position;\n"
                     "layout (location = 1) in vec2 tc;\n"
                     "\n"
+                    "uniform mat4 pr_matrix;\n"
+                    "uniform mat4 vw_matrix;\n"
+                    "\n"
                     "out DATA\n"
                     "{\n"
                     "\tvec2 tc;\n"
@@ -28,10 +31,11 @@ void Shader::loadAllString() {
                     "\n"
                     "void main()\n"
                     "{\n"
-                    "\tgl_Position = position;\n"
+                    "\tgl_Position = pr_matrix * vw_matrix * position;\n"
                     "\tvs_out.tc = tc;\n"
-                    "\tvs_out.position = vec3(position);\n"
+                    "\tvs_out.position = vec3(vw_matrix * position);\n"
                     "}";
+
     string bgFrag = "#version 310 es\n"
                     "#extension GL_EXT_shader_io_blocks : enable\n"
                     "precision mediump float;\n"
@@ -44,13 +48,14 @@ void Shader::loadAllString() {
                     "\tvec3 position;\n"
                     "} fs_in;\n"
                     "\n"
+                    "uniform vec2 bird;\n"
                     "uniform sampler2D tex;\n"
                     "\n"
                     "void main()\n"
                     "{\n"
                     "\tcolor = texture(tex, fs_in.tc);\n"
+                    "\tcolor *= 2.0 / (length(bird - fs_in.position.xy) + 2.5) + 0.5;\n"
                     "}";
-
     BG = Shader(bgVert, bgFrag, true);
 
     string birdVert = "#version 310 es\n"
@@ -64,11 +69,16 @@ void Shader::loadAllString() {
                       "\tvec2 tc;\n"
                       "} vs_out;\n"
                       "\n"
+                      "uniform mat4 pr_matrix;\n"
+                      "uniform mat4 vw_matrix;\n"
+                      "uniform mat4 ml_matrix;\n"
+                      "\n"
                       "void main()\n"
                       "{\n"
-                      "\tgl_Position = position;\n"
+                      "\tgl_Position = pr_matrix * vw_matrix * ml_matrix * position;\n"
                       "\tvs_out.tc = tc;\n"
                       "}";
+
     string birdFrag = "#version 310 es\n"
                       "#extension GL_EXT_shader_io_blocks : enable\n"
                       "precision mediump float;\n"
