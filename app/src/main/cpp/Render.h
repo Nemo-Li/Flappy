@@ -35,7 +35,7 @@ public:
 private:
     Level *level;
 //    Bird *bird;
-//    BackGround background;
+    BackGround background;
 };
 
 extern JNIHelper *jniHelper;

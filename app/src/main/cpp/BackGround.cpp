@@ -13,19 +13,45 @@ BackGround::BackGround() = default;
 BackGround::~BackGround() = default;
 
 void BackGround::Init() {
-    string vertexShaderCode;
-    string vertexFile = string("shaders/triangle.vert");
-    if (!readShaderCode(vertexShaderCode, vertexFile)) {
-        CLOGE("Error in reading Vertex shader");
-        return;
-    }
 
-    string fragmentShaderCode;
-    string fragmentFile = string("shaders/triangle.frag");
-    if (!readShaderCode(fragmentShaderCode, fragmentFile)) {
-        CLOGE("Error in reading Vertex shader");
-        return;
-    }
+    //手机可以支持从assert中读取文件，盒子不可以---
+//    string vertexShaderCode;
+//    string vertexFile = string("shaders/triangle.vert");
+//    if (!readShaderCode(vertexShaderCode, vertexFile)) {
+//        CLOGE("Error in reading Vertex shader");
+//        return;
+//    }
+//
+//    string fragmentShaderCode;
+//    string fragmentFile = string("shaders/triangle.frag");
+//    if (!readShaderCode(fragmentShaderCode, fragmentFile)) {
+//        CLOGE("Error in reading Vertex shader");
+//        return;
+//    }
+
+    string vertexShaderCode = "#version 320 es\n"
+                              "layout(location = 0) in vec4 vPosition;\n"
+                              "layout (location = 1) in vec2 aTexCoord;\n"
+                              "\n"
+                              "out vec2 TexCoord;\n"
+                              "\n"
+                              "void main()\n"
+                              "{\n"
+                              "  gl_Position = vPosition;\n"
+                              "  TexCoord = aTexCoord;\n"
+                              "}";
+
+    string fragmentShaderCode = "#version 320 es\n"
+                                "precision mediump float;\n"
+                                "out vec4 fragColor;\n"
+                                "in vec2 TexCoord;\n"
+                                "\n"
+                                "uniform sampler2D ourTexture;\n"
+                                "\n"
+                                "void main()\n"
+                                "{\n"
+                                "    fragColor = texture(ourTexture, TexCoord);\n"
+                                "}";
 
     m_ProgramObj = ShaderHelper::CreateProgram(vertexShaderCode.c_str(), fragmentShaderCode.c_str(),
                                                m_VertexShader,

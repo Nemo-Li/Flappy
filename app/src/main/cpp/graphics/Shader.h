@@ -20,11 +20,15 @@ public:
 
     static Shader BG, BIRD, PIPE, FADE;
 
-    static void loadAll();
+    static void loadAllPath();
+
+    static void loadAllString();
 
     Shader();
 
     Shader(string vertex, string fragment);
+
+    Shader(string vertexCode, string fragmentCode, bool code);
 
     virtual ~Shader();
 

@@ -24,7 +24,7 @@ public:
     void unbind();
 
 private:
-    int width, height;
+    int *width, *height;
     GLuint texture;
 };
 
