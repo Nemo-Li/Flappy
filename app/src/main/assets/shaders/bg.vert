@@ -17,5 +17,5 @@ void main()
 {
 	gl_Position = pr_matrix * vw_matrix * position;
 	vs_out.tc = tc;
-	vs_out.position = vec3(position);
+	vs_out.position = vec3(vw_matrix * position);
 }

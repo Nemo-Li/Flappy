@@ -53,7 +53,8 @@ void Level::render() {
         glm::mat4 trans = glm::mat4(1.0f);
         Shader::BG.setUniformMat4f("vw_matrix",
                                    glm::translate(trans,
-                                                  glm::vec3(i * 10.0 + xScroll * 0.03, 0.0f, 0.0f)));
+                                                  glm::vec3(i * 10.0 + xScroll * 0.03, 0.0f,
+                                                            0.0f)));
         background.draw();
     }
 
@@ -71,5 +72,11 @@ void Level::render() {
 
 Level::~Level() {
 
+}
+
+void Level::update() {
+    xScroll--;
+    if (-xScroll % 335 == 0) map++;
+    bird.update();
 }
 

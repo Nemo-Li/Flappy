@@ -17,6 +17,8 @@ public:
 
     void render();
 
+    void update();
+
     virtual ~Level();
 
 private:

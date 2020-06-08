@@ -5,6 +5,6 @@
 #ifndef FLAPPY_INPUT_H
 #define FLAPPY_INPUT_H
 
-static bool actionDown = false;
+static uint8_t actionDown;
 
 #endif //FLAPPY_INPUT_H

@@ -3,6 +3,7 @@ package com.nemoli.flappy;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class MainActivity extends Activity {
@@ -29,9 +30,11 @@ public class MainActivity extends Activity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.d("wangli", "action_down");
             actionDown(true);
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
+            Log.d("wangli", "action_up");
             actionDown(false);
         }
         return super.onTouchEvent(event);
