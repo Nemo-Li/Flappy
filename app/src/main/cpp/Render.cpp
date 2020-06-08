@@ -41,14 +41,13 @@ void Render::performGLInit() {
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_TEXTURE_2D);
 
-    Shader::loadAllString();
+    Shader::loadAllPath();
 
     glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
                                      -1.0f, 1.0f);
     Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
     Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
-
-//    Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
+    Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
 
     level = new Level();
 //    bird = new Bird();

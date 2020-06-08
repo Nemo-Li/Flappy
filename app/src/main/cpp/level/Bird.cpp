@@ -35,7 +35,6 @@ Bird::~Bird() = default;
 
 void Bird::update() {
     position.y -= delta;
-    CLOGD("actionDown大小为 %d", actionDown);
     if (actionDown == 1) {
         delta += -0.001f;
     } else {

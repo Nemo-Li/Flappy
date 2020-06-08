@@ -10,6 +10,7 @@
 #include "../graphics/Texture.h"
 #include "Bird.h"
 #include "../graphics/Shader.h"
+#include "Pipe.h"
 
 class Level {
 public:
@@ -27,6 +28,19 @@ private:
     Bird bird;
     int map = 0;
     int xScroll = 0;
+
+    Pipe pipes[5 * 2];
+    int index = 0;
+    float OFFSET = 5.0f;
+    bool control = true, reset = false;
+
+    void createPipes();
+
+    void updatePipes();
+
+    bool collision();
+
+    void renderPipes();
 };
 
 

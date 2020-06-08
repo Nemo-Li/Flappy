@@ -4,6 +4,9 @@
 
 #include "Level.h"
 #include "gtc/matrix_transform.hpp"
+#include "time.h"
+#include "../input/Input.h"
+#include "../CLogger.h"
 
 Level::Level() {
     float vertices[] = {
@@ -12,13 +15,6 @@ Level::Level() {
             0.0f, 10.0f * 9.0f / 16.0f, 0.0f,
             0.0f, -10.0f * 9.0f / 16.0f, 0.0f
     };
-
-//    float vertices[] = {
-//            -1.0f, -1.0f, 0.0f,
-//            -1.0, 1.0f, 0.0f,
-//            1.0f, 1.0f, 0.0f,
-//            1.0f, -1.0f, 0.0f
-//    };
 
     unsigned int indices[] = {
             0, 1, 2,
@@ -38,7 +34,7 @@ Level::Level() {
     bgTexture = Texture("bg.jpeg", false);
     bird = Bird();
 
-//    createPipes();
+    createPipes();
 }
 
 
@@ -60,7 +56,7 @@ void Level::render() {
     Shader::BG.disable();
     bgTexture.unbind();
 
-//    renderPipes();
+    renderPipes();
     bird.render();
 
 //    Shader::FADE.enable();
@@ -74,8 +70,86 @@ Level::~Level() {
 }
 
 void Level::update() {
-    xScroll--;
-    if (-xScroll % 335 == 0) map++;
+    if (control) {
+        xScroll--;
+        if (-xScroll % 335 == 0) map++;
+        if (-xScroll > 250 && -xScroll % 120 == 0)
+            updatePipes();
+    }
     bird.update();
+
+    if (control && collision()) {
+        bird.fall();
+        control = false;
+    }
+
+    if (!control && actionDown) {
+        reset = true;
+    }
+
+}
+
+void Level::createPipes() {
+    Pipe::create();
+    for (int i = 0; i < 5 * 2; i += 2) {
+        int rand1 = rand();
+        CLOGD("随机数 %d", rand1);
+        pipes[i] = Pipe(OFFSET + index * 3.0f, 4.0f);
+        pipes[i + 1] = Pipe(pipes[i].getX(), pipes[i].getY() - 11.5f);
+        index += 2;
+    }
+}
+
+void Level::updatePipes() {
+    pipes[index % 10] = Pipe(OFFSET + index * 3.0f, rand() * 4.0f);
+    pipes[(index + 1) % 10] = Pipe(pipes[index % 10].getX(), pipes[index % 10].getY() - 11.5f);
+    index += 2;
+}
+
+bool Level::collision() {
+    for (int i = 0; i < 5 * 2; i++) {
+        float bx = -xScroll * 0.05f;
+        float by = bird.getY();
+        float px = pipes[i].getX();
+        float py = pipes[i].getY();
+
+        float bx0 = bx - bird.getSize() / 2.0f;
+        float bx1 = bx + bird.getSize() / 2.0f;
+        float by0 = by - bird.getSize() / 2.0f;
+        float by1 = by + bird.getSize() / 2.0f;
+
+        float px0 = px;
+        float px1 = px + Pipe::getWidth();
+        float py0 = py;
+        float py1 = py + Pipe::getHeight();
+
+        if (bx1 > px0 && bx0 < px1) {
+            if (by1 > py0 && by0 < py1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void Level::renderPipes() {
+    Shader::PIPE.enable();
+    Shader::PIPE.setUniform2f("bird", 0, bird.getY());
+
+    glm::mat4 tran = glm::mat4(1.0f);
+    tran = glm::translate(tran, glm::vec3(xScroll * 0.05f, 0.0f, 0.0f));
+
+    Shader::PIPE.setUniformMat4f("vw_matrix", tran);
+    Pipe::getTexture().bind();
+    Pipe::getMesh().bind();
+
+    for (int i = 0; i < 5 * 2; i++) {
+        Shader::PIPE.setUniformMat4f("ml_matrix", pipes[i].getModelMatrix());
+        Shader::PIPE.setUniform1i("top", i % 2 == 0 ? 1 : 0);
+        Pipe::getMesh().draw();
+    }
+    Pipe::getMesh().unbind();
+    Pipe::getTexture().unbind();
+
 }
 
