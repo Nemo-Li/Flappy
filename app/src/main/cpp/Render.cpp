@@ -41,7 +41,7 @@ void Render::performGLInit() {
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_TEXTURE_2D);
 
-    Shader::loadAllPath();
+    Shader::loadAllString();
 
 //    glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
 //                                     -1.0f, 1.0f);

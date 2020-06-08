@@ -33,7 +33,6 @@ void Shader::loadAllString() {
                     "\tvs_out.tc = tc;\n"
                     "\tvs_out.position = vec3(position);\n"
                     "}";
-
     string bgFrag = "#version 310 es\n"
                     "#extension GL_EXT_shader_io_blocks : enable\n"
                     "precision mediump float;\n"
@@ -46,7 +45,6 @@ void Shader::loadAllString() {
                     "\tvec3 position;\n"
                     "} fs_in;\n"
                     "\n"
-                    "uniform vec2 bird;\n"
                     "uniform sampler2D tex;\n"
                     "\n"
                     "void main()\n"
@@ -65,16 +63,13 @@ void Shader::loadAllString() {
                       "out DATA\n"
                       "{\n"
                       "\tvec2 tc;\n"
-                      "\tvec3 position;\n"
                       "} vs_out;\n"
                       "\n"
                       "void main()\n"
                       "{\n"
                       "\tgl_Position = position;\n"
                       "\tvs_out.tc = tc;\n"
-                      "\tvs_out.position = vec3(position);\n"
                       "}";
-
     string birdFrag = "#version 310 es\n"
                       "#extension GL_EXT_shader_io_blocks : enable\n"
                       "precision mediump float;\n"
@@ -94,6 +89,7 @@ void Shader::loadAllString() {
                       "\tif (color.w < 1.0)\n"
                       "\t\tdiscard;\n"
                       "}";
+
     BIRD = Shader(birdVert, birdFrag, true);
 }
 
