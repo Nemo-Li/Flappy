@@ -14,7 +14,7 @@
 
 class Bird {
 private:
-    float size = 0.2f;
+    float size = 1.0f;
     VertexArray *mesh;
     Texture *texture;
     glm::vec3 position;

@@ -6,19 +6,19 @@
 #include "gtc/matrix_transform.hpp"
 
 Level::Level() {
-//    float vertices[] = {
-//            -10.0f, -10.0f * 9.0f / 16.0f, 0.0f,
-//            -10.0f, 10.0f * 9.0f / 16.0f, 0.0f,
-//            0.0f, 10.0f * 9.0f / 16.0f, 0.0f,
-//            0.0f, -10.0f * 9.0f / 16.0f, 0.0f
-//    };
-
     float vertices[] = {
-            -1.0f, -1.0f, 0.0f,
-            -1.0, 1.0f, 0.0f,
-            1.0f, 1.0f, 0.0f,
-            1.0f, -1.0f, 0.0f
+            -10.0f, -10.0f * 9.0f / 16.0f, 0.0f,
+            -10.0f, 10.0f * 9.0f / 16.0f, 0.0f,
+            0.0f, 10.0f * 9.0f / 16.0f, 0.0f,
+            0.0f, -10.0f * 9.0f / 16.0f, 0.0f
     };
+
+//    float vertices[] = {
+//            -1.0f, -1.0f, 0.0f,
+//            -1.0, 1.0f, 0.0f,
+//            1.0f, 1.0f, 0.0f,
+//            1.0f, -1.0f, 0.0f
+//    };
 
     unsigned int indices[] = {
             0, 1, 2,
@@ -47,15 +47,16 @@ void Level::render() {
     Shader::BG.enable();
 //    Shader::BG.setUniform2f("bird", 0, bird.getY());
     background.bind();
-    background.draw();
+//    background.draw();
 
-//    for (int i = map; i < map + 4; i++) {
-//        glm::mat4 trans = glm::mat4(1.0f);
-//        Shader::BG.setUniformMat4f("vw_matrix",
-//                                   glm::translate(trans,
-//                                                  glm::vec3(i * 10 + xScroll * 0.03f, 0.0f, 0.0f)));
-//        background.draw();
-//    }
+    for (int i = map; i < map + 4; i++) {
+        glm::mat4 trans = glm::mat4(1.0f);
+        Shader::BG.setUniformMat4f("vw_matrix",
+                                   glm::translate(trans,
+                                                  glm::vec3(i * 10.0 + xScroll * 0.03, 0.0f, 0.0f)));
+        background.draw();
+    }
+
     Shader::BG.disable();
     bgTexture.unbind();
 
