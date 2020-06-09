@@ -91,17 +91,19 @@ void Level::update() {
 
 void Level::createPipes() {
     Pipe::create();
+    srand((unsigned) time(NULL));
     for (int i = 0; i < 5 * 2; i += 2) {
-        int rand1 = rand();
+        double rand1 = rand() / double(RAND_MAX);
         CLOGD("随机数 %d", rand1);
-        pipes[i] = Pipe(OFFSET + index * 3.0f, 4.0f);
+        pipes[i] = Pipe(OFFSET + index * 3.0f, rand1 * 4.0f);
         pipes[i + 1] = Pipe(pipes[i].getX(), pipes[i].getY() - 11.5f);
         index += 2;
     }
 }
 
 void Level::updatePipes() {
-    pipes[index % 10] = Pipe(OFFSET + index * 3.0f, rand() * 4.0f);
+    double rand1 = rand() / double(RAND_MAX);
+    pipes[index % 10] = Pipe(OFFSET + index * 3.0f, rand1 * 4.0f);
     pipes[(index + 1) % 10] = Pipe(pipes[index % 10].getX(), pipes[index % 10].getY() - 11.5f);
     index += 2;
 }
