@@ -33,6 +33,7 @@ private:
     int index = 0;
     float OFFSET = 5.0f;
     bool control = true, reset = false;
+    float time = 0.0f;
 
     void createPipes();
 

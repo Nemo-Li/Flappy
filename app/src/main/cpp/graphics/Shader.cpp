@@ -106,7 +106,7 @@ void Shader::loadAllPath() {
     PIPE = Shader("shaders/pipe.vert", "shaders/pipe.frag");
     BG = Shader("shaders/bg.vert", "shaders/bg.frag");
     BIRD = Shader("shaders/bird.vert", "shaders/bird.frag");
-//    FADE = Shader("shaders/fade.vert", "shaders/fade.frag");
+    FADE = Shader("shaders/fade.vert", "shaders/fade.frag");
 }
 
 Shader::Shader() {
