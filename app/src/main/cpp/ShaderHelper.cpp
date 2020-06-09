@@ -133,7 +133,6 @@ GLuint ShaderHelper::CreateProgramWithFeedback(const char *pVertexShaderSource,
     CLOGD("ShaderHelper::CreateProgramWithFeedback");
     CLOGD("ShaderHelper::CreateProgramWithFeedback program = %d", program);
     return program;
-    return 0;
 }
 
 void ShaderHelper::DeleteProgram(GLuint &program) {

@@ -15,9 +15,7 @@ VertexArray::VertexArray(int count) {
 VertexArray::VertexArray(float *vertices, unsigned int *indices, float *textureCoordinates,
                          int vLength,
                          int iLength, int tLength) {
-//    CLOGD("VertexArray方法");
     VertexArray::count = 6;
-//    CLOGD("赋值后count %d", count);
 
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
@@ -41,7 +39,6 @@ VertexArray::VertexArray(float *vertices, unsigned int *indices, float *textureC
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-//    CLOGD("结束");
 }
 
 void VertexArray::bind() {
@@ -60,11 +57,8 @@ void VertexArray::unbind() {
 
 void VertexArray::draw() {
     if (ibo > 0) {
-//        CLOGD(" VertexArray::draw ibo %d", ibo);
-//        CLOGD(" VertexArray::draw count %d", count);
         glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
     } else {
-//        CLOGD("VertexArray::bind() coung %d", count);
         glDrawArrays(GL_TRIANGLES, 0, count);
     }
 }

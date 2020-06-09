@@ -34,7 +34,6 @@ public:
 
 private:
     Level *level;
-//    Bird *bird;
     BackGround background;
 };
 

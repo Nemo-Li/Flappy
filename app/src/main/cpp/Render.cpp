@@ -16,15 +16,10 @@ Render::~Render() {
 }
 
 void Render::performGLInit() {
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-//    CLOGD("GLInit, clear color");
-
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-//    glDepthFunc(GL_LEQUAL);
-
+    // glDepthFunc(GL_LEQUAL);
     CLOGI("OpenGL %s, GLSL %s", glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION));
 
     // check if the device supports GLES 3 or GLES 2
@@ -34,8 +29,6 @@ void Render::performGLInit() {
     } else {
         CLOGD("Device supports GLES 2");
     }
-//    string shaderFile;
-//    jniHelper->ExtractAssetReturnFilename("shaders/bg.frag", shaderFile);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -46,20 +39,13 @@ void Render::performGLInit() {
                                      -1.0f, 1.0f);
 
     Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
-//    Shader::PIPE.setUniform1i("tex", 1);
 
     Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
-//    Shader::BIRD.setUniform1i("tex", 1);
 
     Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
-//    Shader::BG.setUniform1i("tex", 1);
 
 
     level = new Level();
-//    bird = new Bird();
-
-//    background = BackGround();
-//    background.Init();
     checkGLError("MyGLInit");
 }
 
@@ -106,11 +92,8 @@ void Render::setViewport(int width, int height) {
 
 void Render::render() {
     glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
-
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     level->update();
     level->render();
-//    bird->render();
-//    background.Draw();
 }
 

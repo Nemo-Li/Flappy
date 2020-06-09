@@ -4,7 +4,6 @@
 
 #include "Level.h"
 #include "gtc/matrix_transform.hpp"
-#include "time.h"
 #include "../input/Input.h"
 #include "../CLogger.h"
 
@@ -91,10 +90,8 @@ void Level::update() {
 
 void Level::createPipes() {
     Pipe::create();
-    srand((unsigned) time(NULL));
     for (int i = 0; i < 5 * 2; i += 2) {
         double rand1 = rand() / double(RAND_MAX);
-        CLOGD("随机数 %d", rand1);
         pipes[i] = Pipe(OFFSET + index * 3.0f, rand1 * 4.0f);
         pipes[i + 1] = Pipe(pipes[i].getX(), pipes[i].getY() - 11.5f);
         index += 2;
