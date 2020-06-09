@@ -36,9 +36,9 @@ Bird::~Bird() = default;
 void Bird::update() {
     position.y -= delta;
     if (actionDown == 1) {
-        delta += -0.001f;
+        delta = -0.1f;
     } else {
-        delta += 0.001f;
+        delta += 0.01f;
     }
     rot = -delta * 90.0f;
 }
