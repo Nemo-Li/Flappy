@@ -22,6 +22,8 @@ public:
 
     virtual ~Level();
 
+    bool isGameOver();
+
 private:
     VertexArray background, fade;
     Texture bgTexture;

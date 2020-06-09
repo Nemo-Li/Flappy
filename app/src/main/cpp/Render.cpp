@@ -33,7 +33,7 @@ void Render::performGLInit() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    Shader::loadAllString();
+    Shader::loadAllPath();
 
     glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
                                      -1.0f, 1.0f);
@@ -94,6 +94,9 @@ void Render::render() {
     glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     level->update();
+    if (level->isGameOver()) {
+        level = new Level();
+    }
     level->render();
 }
 

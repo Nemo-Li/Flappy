@@ -152,3 +152,7 @@ void Level::renderPipes() {
 
 }
 
+bool Level::isGameOver() {
+    return reset;
+}
+
