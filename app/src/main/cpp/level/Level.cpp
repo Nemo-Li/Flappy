@@ -39,6 +39,7 @@ Level::Level() {
 
 
 void Level::render() {
+    renderPipes();
     bgTexture.bind();
     Shader::BG.enable();
     Shader::BG.setUniform2f("bird", 0, bird.getY());
@@ -56,7 +57,6 @@ void Level::render() {
     Shader::BG.disable();
     bgTexture.unbind();
 
-    renderPipes();
     bird.render();
 
 //    Shader::FADE.enable();
@@ -140,16 +140,16 @@ void Level::renderPipes() {
     tran = glm::translate(tran, glm::vec3(xScroll * 0.05f, 0.0f, 0.0f));
 
     Shader::PIPE.setUniformMat4f("vw_matrix", tran);
-    Pipe::getTexture().bind();
-    Pipe::getMesh().bind();
+    Pipe::texture.bind();
+    Pipe::mesh.bind();
 
     for (int i = 0; i < 5 * 2; i++) {
         Shader::PIPE.setUniformMat4f("ml_matrix", pipes[i].getModelMatrix());
         Shader::PIPE.setUniform1i("top", i % 2 == 0 ? 1 : 0);
-        Pipe::getMesh().draw();
+        Pipe::mesh.draw();
     }
-    Pipe::getMesh().unbind();
-    Pipe::getTexture().unbind();
+    Pipe::mesh.unbind();
+    Pipe::texture.unbind();
 
 }
 

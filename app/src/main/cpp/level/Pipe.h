@@ -13,8 +13,6 @@
 class Pipe {
 private:
     static float width, height;
-    static Texture *texture;
-    static VertexArray *mesh;
     glm::vec3 position;
     glm::mat4 ml_matrix;
 
@@ -40,6 +38,10 @@ public:
     static float getHeight();
 
     virtual ~Pipe();
+
+    static Texture texture;
+
+    static VertexArray mesh;
 };
 
 

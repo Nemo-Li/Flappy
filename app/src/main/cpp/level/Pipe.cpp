@@ -6,8 +6,8 @@
 #include "gtc/matrix_transform.hpp"
 
 float Pipe::width = 1.5f, Pipe::height = 8.0f;
-Texture *Pipe::texture = nullptr;
-VertexArray *Pipe::mesh = nullptr;
+Texture Pipe::texture;
+VertexArray Pipe::mesh;
 
 
 Pipe::Pipe() {
@@ -37,8 +37,8 @@ void Pipe::create() {
             1, 1
     };
 
-    mesh = new VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices), sizeof(tcs));
-    texture = new Texture("pipe.png", true);
+    Pipe::texture = Texture("pipe.png", true);
+    Pipe::mesh = VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices), sizeof(tcs));
 }
 
 Pipe::Pipe(float x, float y) {
@@ -62,15 +62,15 @@ glm::mat4 Pipe::getModelMatrix() {
 }
 
 VertexArray Pipe::getMesh() {
-    return *mesh;
+    return mesh;
 }
 
 Texture Pipe::getTexture() {
-    return *texture;
+    return Pipe::texture;
 }
 
 float Pipe::getWidth() {
-    return width;
+    return Pipe::width;
 }
 
 float Pipe::getHeight() {

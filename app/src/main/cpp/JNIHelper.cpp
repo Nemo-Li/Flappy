@@ -93,11 +93,11 @@ string JNIHelper::getFileName(string fileName) {
 
 unsigned char *JNIHelper::ExtractAssetImage(string assetName) {
     int n;
+    CLOGD("加载图片%s", assetName.c_str());
     // Open file
     AAsset *asset = AAssetManager_open(apkAssetManager, assetName.c_str(), AASSET_MODE_STREAMING);
     off_t assetLength = AAsset_getLength(asset);
     auto *fileData = (unsigned char *) AAsset_getBuffer(asset);
     unsigned char *image = stbi_load_from_memory(fileData, assetLength, &imageW, &imageH, &n, 0);
-//    CLOGD("加载图片成功");
     return image;
 }

@@ -23,7 +23,7 @@ void Render::performGLInit() {
     // Enable depth test
     glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-    glDepthFunc(GL_LEQUAL);
+//    glDepthFunc(GL_LEQUAL);
 
     CLOGI("OpenGL %s, GLSL %s", glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION));
 
@@ -37,17 +37,23 @@ void Render::performGLInit() {
 //    string shaderFile;
 //    jniHelper->ExtractAssetReturnFilename("shaders/bg.frag", shaderFile);
 
-//    glEnable(GL_BLEND);
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     Shader::loadAllPath();
 
     glm::mat4 pr_matrix = glm::ortho(-10.0f, 10.0f, -10.0f * 9.0f / 16.0f, 10.0f * 9.0f / 16.0f,
                                      -1.0f, 1.0f);
-    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
-    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
+
     Shader::PIPE.setUniformMat4f("pr_matrix", pr_matrix);
+//    Shader::PIPE.setUniform1i("tex", 1);
+
+    Shader::BIRD.setUniformMat4f("pr_matrix", pr_matrix);
+//    Shader::BIRD.setUniform1i("tex", 1);
+
+    Shader::BG.setUniformMat4f("pr_matrix", pr_matrix);
+//    Shader::BG.setUniform1i("tex", 1);
+
 
     level = new Level();
 //    bird = new Bird();

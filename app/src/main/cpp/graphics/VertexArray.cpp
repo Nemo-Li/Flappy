@@ -46,10 +46,8 @@ VertexArray::VertexArray(float *vertices, unsigned int *indices, float *textureC
 
 void VertexArray::bind() {
     glBindVertexArray(vao);
-//    CLOGD("bind vao == %d", vao);
     if (ibo > 0) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-//        CLOGD("VertexArray::bind ibo %d", ibo);
     }
 }
 

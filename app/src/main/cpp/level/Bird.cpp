@@ -9,10 +9,10 @@
 
 Bird::Bird() {
     float vertices[] = {
-            -size / 2.0f, -size / 2.0f, 0.0f,
-            -size / 2.0f, size / 2.0f, 0.0f,
-            size / 2.0f, size / 2.0f, 0.0f,
-            size / 2.0f, -size / 2.0f, 0.0f
+            -size / 2.0f, -size / 2.0f, 0.2f,
+            -size / 2.0f, size / 2.0f, 0.2f,
+            size / 2.0f, size / 2.0f, 0.2f,
+            size / 2.0f, -size / 2.0f, 0.2f
     };
 
     unsigned int indices[] = {
