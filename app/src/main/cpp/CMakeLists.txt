@@ -33,6 +33,7 @@ add_library( # Sets the name of the library.
         level/Level.cpp
         level/Pipe.cpp
         level/Bird.cpp
+        level/Fade.cpp
         IFlappyRender.cpp
         BackGround.cpp
 

@@ -156,16 +156,14 @@ void Shader::loadAllString() {
 
     string fadeVert = "#version 310 es\n"
                       "\n"
+                      "layout (location = 0) in vec4 position;\n"
+                      "layout (location = 1) in vec2 tc;\n"
+                      "\n"
                       "void main()\n"
                       "{\n"
-                      "const vec4 vertices[6] = vec4[6](vec4( 1.0, -1.0, -0.5, 1.0),\n"
-                      " vec4(-1.0, -1.0, -0.5, 1.0),\n"
-                      " vec4( 1.0,  1.0, -0.5, 1.0),\n"
-                      " vec4( 1.0,  1.0, -0.5, 1.0),\n"
-                      " vec4(-1.0, -1.0, -0.5, 1.0),\n"
-                      " vec4(-1.0,  1.0, -0.5, 1.0));\n"
-                      "gl_Position = vertices[gl_VertexID];\n"
+                      "    gl_Position = position;\n"
                       "}";
+
     string fadeFrag = "#version 310 es\n"
                       "precision mediump float;\n"
                       "\n"
@@ -175,10 +173,11 @@ void Shader::loadAllString() {
                       "\n"
                       "void main()\n"
                       "{\n"
-                      "if (time > 1.0)\n"
-                      "discard;\n"
-                      "color = vec4(1.0, 1.0, 1.0, 1.0 - time);\n"
+                      "\tif (time > 1.0)\n"
+                      "\t\tdiscard;\n"
+                      "\tcolor = vec4(1.0, 1.0, 1.0, 1.0 - time);\n"
                       "}";
+
     FADE = Shader(fadeVert, fadeFrag, true);
 }
 

@@ -11,6 +11,7 @@
 #include "Bird.h"
 #include "../graphics/Shader.h"
 #include "Pipe.h"
+#include "Fade.h"
 
 class Level {
 public:
@@ -25,9 +26,10 @@ public:
     bool isGameOver();
 
 private:
-    VertexArray background, fade;
+    VertexArray background;
     Texture bgTexture;
     Bird bird;
+    Fade fade;
     int map = 0;
     int xScroll = 0;
 

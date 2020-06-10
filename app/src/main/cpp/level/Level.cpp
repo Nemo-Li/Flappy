@@ -27,11 +27,11 @@ Level::Level() {
             1, 1
     };
 
-    fade = VertexArray(6);
     background = VertexArray(vertices, indices, tcs, sizeof(vertices), sizeof(indices),
                              sizeof(tcs));
     bgTexture = Texture("bg.jpeg", false);
     bird = Bird();
+    fade = Fade();
 
     createPipes();
 }
@@ -57,11 +57,8 @@ void Level::render() {
     bgTexture.unbind();
 
     bird.render();
+    fade.render(time);
 
-    Shader::FADE.enable();
-    Shader::FADE.setUniform1f("time", time);
-    fade.render();
-    Shader::FADE.disable();
 }
 
 Level::~Level() {
