@@ -1,0 +1,82 @@
+@startuml
+package "graphics" {
+
+class Shader {
+static Shader BG, BIRD, PIPE, FADE;
+void enable();
+void disable();
+}
+note bottom
+着色器语言编译链接类,包括顶点着色器和片段着色器
+支持通过jni从assets中获取着色器文件.
+enable
+end note
+
+class Texture {
+    Texture(string path, bool png);
+    void bind();
+    void unbind();
+}
+note top
+纹理类,在构造函数中创建纹理,配置纹理参数.
+通过jni从assert文件获取图片流信息,把图片
+流绑定到创建的纹理上,释放图片内存.
+使用stb_image来解析图片
+1.一张图片对应一个Texture对象
+2.使用时先bind,使用完unbind.
+3.加载png和jpg图片不一样，需要区分
+end note
+
+class VertexArray {
+    void bind();
+    void unbind();
+    void draw();
+    void render();
+}
+note top
+顶点数组类,把顶点数据信息通过
+opengl传递到显卡缓存,最终渲染
+时绑定vao和ibo，最终的绘制都
+在这里进行绘制
+end note
+
+}
+
+class ShaderHelper {
+static int CreateProgram(string vertexSource, string fragSource);
+}
+note top
+通用的着色器帮助类，编译链接生成
+着色器program id,提供opengl
+错误检测方法
+end note
+Shader ..> ShaderHelper
+
+class Render {
+
+}
+
+package "level" {
+class Bird
+Texture *-- Bird
+VertexArray *-- Bird
+class Pipe
+Texture *-- Pipe
+VertexArray *-- Pipe
+class Level
+Texture *-- Level
+VertexArray *-- Level
+Render ..> Level
+}
+
+class JNIHelper {
+}
+Texture ..> JNIHelper
+Shader ..> JNIHelper
+
+class MainActivityC {
+}
+
+class MainActivity {
+}
+@enduml

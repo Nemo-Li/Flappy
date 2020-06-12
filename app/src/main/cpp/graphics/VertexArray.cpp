@@ -4,7 +4,6 @@
 
 #include <GLES3/gl32.h>
 #include "VertexArray.h"
-#include "Shader.h"
 #include "../CLogger.h"
 
 VertexArray::VertexArray(int count) {
