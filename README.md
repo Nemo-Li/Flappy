@@ -8,3 +8,5 @@
 
 ![](readme/flappy.gif)
 
+[详细介绍](flappy.md)
+

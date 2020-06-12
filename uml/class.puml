@@ -1,14 +1,16 @@
 @startuml
-package "graphics" {
+package "graphics" #DDDDDD {
 
 class Shader {
 static Shader BG, BIRD, PIPE, FADE;
 void enable();
 void disable();
 }
-note bottom
-着色器语言编译链接类,包括顶点着色器和片段着色器
-支持通过jni从assets中获取着色器文件.
+note left
+着色器语言编译链接类,
+包括顶点着色器和片段
+着色器支持通过jni从
+assets中获取着色器文件.
 enable
 end note
 
@@ -42,41 +44,100 @@ end note
 
 }
 
+package "levels" #DDFF00{
+class Bird {
+void update();
+void fall();
+void render();
+}
+
+Texture *-- Bird
+VertexArray *-- Bird
+class Pipe {
+static Texture texture;
+static VertexArray mesh;
+}
+
+Texture *-- Pipe
+VertexArray *-- Pipe
+class Level {
++ void render();
++ void update();
+- void createPipes();
+- void updatePipes();
+- bool collision();
+- void renderPipes();
+}
+Texture *-- Level
+VertexArray *-- Level
+}
+Level <.. Render
+class Render {
+    void performGLInit();
+    void setViewport(int width, int height);
+    void render();
+}
+note bottom
+渲染类,初始化opengl
+加载所有的着色器
+依赖level类去真正的渲染
+end note
+
+together {
 class ShaderHelper {
 static int CreateProgram(string vertexSource, string fragSource);
 }
-note top
+note bottom
 通用的着色器帮助类，编译链接生成
 着色器program id,提供opengl
 错误检测方法
 end note
 Shader ..> ShaderHelper
 
-class Render {
-
-}
-
-package "level" {
-class Bird
-Texture *-- Bird
-VertexArray *-- Bird
-class Pipe
-Texture *-- Pipe
-VertexArray *-- Pipe
-class Level
-Texture *-- Level
-VertexArray *-- Level
-Render ..> Level
-}
-
 class JNIHelper {
 }
 Texture ..> JNIHelper
 Shader ..> JNIHelper
-
-class MainActivityC {
 }
 
-class MainActivity {
+
+class java.MainActivity {
+void onCreate()
+void onDestroy()
 }
+
+class c.MainActivity {
+native void createObjectNative()
+native void deleteObjectNative()
+}
+note bottom
+MainActivity的c端交互类
+和MainActivity保持一致的
+生命周期
+end note
+
+java.MainActivity ..> c.MainActivity
+
+class java.FlappyRender {
+void onSurfaceCreated()
+void onSurfaceChanged()
+void onDrawFrame()
+}
+
+class c.IFlappyRender {
+native void drawFrameNative()
+native void surfaceCreatedNative()
+native void surfaceChangedNative()
+}
+note bottom
+和surfaceView的c端交互类
+surfaceView的相关jni
+实现方法
+end note
+
+java.FlappyRender ..> c.IFlappyRender
+Render <.. c.IFlappyRender
+
+JNIHelper -[hidden]> java.FlappyRender
+Render -[hidden]> java.FlappyRender
 @enduml
