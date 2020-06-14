@@ -34,3 +34,70 @@ glm库，GLM是Open**GL** **M**athematics的缩写，它是一个**只有头文
 
 stb_image.h 是Sean Barrett的一个非常流行的单头文件图像加载库，它能够加载大部分流行的文件格式。利用stb_image来加载png和jpg图片。
 
+### 简单的矩阵介绍
+
+矩阵、矩阵乘法最初出现的目的就是为了解线性方程组。[参考马同学](https://www.matongxue.com/madocs/755/)
+
+#### 单位矩阵
+
+在OpenGL中，由于某些原因我们通常使用**4×4**的变换矩阵，而其中最重要的原因就是大部分的向量都是4分量的。
+
+$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} 1}  & {\color{green} 0}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} 1} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$\left[\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \end{matrix}\right]$$ = $$\left[ \begin{matrix} {\color{red} 1} \cdot 1 \\ {\color{green} 1} \cdot 2 \\ {\color{blue} 1} \cdot 3 \\ {\color{purple} 1} \cdot 4 \end{matrix} \right]$$ = $$\left[ \begin{matrix} 1 \\ 2 \\ 3 \\ 4  \end{matrix} \right]$$ 
+
+#### 缩放
+
+$$\left[ \begin{matrix} {\color{red} {S_1}} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} {S_2}}  & {\color{green} 0}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} {S_3}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$\left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right)$$ = $$\left( \begin{matrix} \color{red}{S_1} \cdot x \\ \color{green} {S_2} \cdot y \\ \color{blue}{S_3} \cdot z \\ 1  \end{matrix}\right)$$
+
+#### 位移
+
+$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} {T_x}} \\ {\color{green} 0} & {\color{green} 1}  & {\color{green} 0}  & {\color{green} {T_y}}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} 1} & {\color{blue} {T_z}} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $$ = $$\left( \begin{matrix} x + \color{red}{T_x} \\ y + \color{green} {T_y} \\  z + \color{blue}{T_z} \\ 1  \end{matrix}\right)$$
+
+
+
+> **齐次坐标(Homogeneous Coordinates)**
+>
+> 向量的w分量也叫齐次坐标。想要从齐次向量得到3D向量，我们可以把x、y和z坐标分别除以w坐标。我们通常不会注意这个问题，因为w分量通常是1.0。使用齐次坐标有几点好处：它允许我们在3D向量上进行位移（如果没有w分量我们是不能位移向量的）
+>
+> 如果一个向量的齐次坐标是0，这个坐标就是方向向量(Direction Vector)，因为w坐标是0，这个向量就不能位移（译注：这也就是我们说的不能位移一个方向）。
+
+#### 旋转
+
+沿x轴旋转：
+
+$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} {cos\theta}}  & {\color{green} {-sin\theta}}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} {sin\theta}} & {\color{blue} {cos\theta}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $$ = $$\left( \begin{matrix} x  \\ \color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z  \\  \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z \\ 1  \end{matrix}\right)$$
+
+这里$x$不变，只有$y,z$坐标在变化，我们得到了计算变换后的$(y', z')$坐标
+
+$y'=\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z$
+
+$z'= \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z$
+
+$y'^2 + z'^2 = (\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z)^2 + ( \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z)^2$
+
+$= y^2 + z^2$
+
+从上面推导得到矩阵运算后$y,z$坐标的平方和不变，最终结论就是$y,z$坐标都在一个圆上，所以是绕x轴旋转，下面的矩阵变换同理可证
+
+矩阵的变化如下图所示：
+
+![](readme/x.gif)
+
+沿y轴旋转：
+
+$\left[ \begin{matrix} {\color{red} {\color{red} {cos\theta}}} & {\color{red} 0} & {\color{red} {sin\theta}}& {\color{red} 0} \\ {\color{green} 0} & {\color{green} 1} &  {\color{green} 0} & {\color{green} 0}  \\ {\color{blue} {-sin\theta}}  & {\color{blue} 0} & {\color{blue} {cos\theta}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$\cdot$ $ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $ = $\left( \begin{matrix} \color{red} {cos\theta} \cdot x + \color{red}{sin\theta} \cdot z  \\ y  \\  \color{blue}{-sin\theta} \cdot x + \color{blue}{cos\theta} \cdot z \\ 1  \end{matrix}\right)$
+
+动图展示：
+
+![](readme/y.gif)
+
+沿z轴旋转：
+
+$\left[ \begin{matrix} {\color{red} {\color{red} {cos\theta}}} & {\color{red} {-sin\theta}} & \color{red}0 & {\color{red} 0} \\ {\color{green} {sin\theta}}  & {\color{green} {cos\theta}} & {\color{green} 0}& {\color{green} 0} \\ {\color{blue} 0} &  {\color{blue} 0} & {\color{blue} 1}  & \color{blue} 0 \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $ $\cdot$ $ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $ = $\left( \begin{matrix} \color{red} {cos\theta} \cdot x - \color{red}{sin\theta} \cdot y  \\  \color{green}{sin\theta} \cdot x + \color{green}{cos\theta} \cdot z  \\  z  \\ 1  \end{matrix}\right)$
+
+动图展示：
+
+![](readme/z.gif)
+
+#### 矩阵的组合
+
+### 游戏实现
