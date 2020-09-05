@@ -62,6 +62,28 @@ $$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\
 
 #### 旋转
 
+##### 先看二维空间的旋转
+
+![](readme/坐标基变换.png)
+
+提供一种角度来计算旋转变换的坐标：
+
+我们可以这样广义上来理解坐标，坐标是用向量空间中的两个向量基来表示的。
+
+对于标准的坐标系，向量基是$x(1,0)$,$y(0,1)$,在这个向量空间下，上图的P点可以如下表示
+
+$\left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix}\right]$ $\cdot$ $\left( \begin{matrix} x \\ y \end{matrix}\right)$ = $\left( \begin{matrix} x \\ y \end{matrix}\right)$
+
+发生了旋转，可以理解为整个坐标系旋转，也就是说是坐标基发生了旋转。这里我们逆时针旋转了$\theta$
+
+现在坐标基可以表示为$x(cos\theta, sin\theta), y(cos(90+\theta), sin(90 + \theta)) = y(-sin\theta, cos\theta)$
+
+同样，P点的坐标还是$(x,y)$,显然同样可以这样来表示这个点
+
+$\left[ \begin{matrix} cos\theta & sin\theta \\ -sin\theta & cos\theta \end{matrix} \right]$ $\cdot$ $\left( \begin{matrix} x \\ y \end{matrix}\right)$ = $\left( \begin{matrix} cos\theta x + sin\theta y \\ -sin\theta x + cos\theta y  \end{matrix} \right)$ 
+
+##### 下面上升到三维空间
+
 沿x轴旋转：
 
 $$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} {cos\theta}}  & {\color{green} {-sin\theta}}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} {sin\theta}} & {\color{blue} {cos\theta}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $$ = $$\left( \begin{matrix} x  \\ \color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z  \\  \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z \\ 1  \end{matrix}\right)$$
@@ -98,6 +120,43 @@ $\left[ \begin{matrix} {\color{red} {\color{red} {cos\theta}}} & {\color{red} {-
 
 ![](readme/z.gif)
 
+相当于坐标系的变换
+
+![](readme/坐标变换.png)
+
 #### 矩阵的组合
 
+[官方API介绍](https://www.khronos.org/files/opengles_shading_language.pdf)
+
+每次左乘矩阵，就相当于把顶点变换到矩阵对应的坐标系
+
 ### 游戏实现
+
+#### 移动
+
+背景的渲染和移动，每次调用render渲染时，会绘制4幅背景图，正射投影的截锥体范围内，只可见2幅背景图。view矩阵在向右移动，表现上看就是背景图在向后移动。
+
+#### 光照
+
+我们在现实生活中看到某一物体的颜色并不是这个物体真正拥有的颜色，而是它所反射的(Reflected)颜色。
+
+我们在现实生活中看到某一物体的颜色并不是这个物体真正拥有的颜色，而是它所反射的(Reflected)颜色。换句话说，那些不能被物体所吸收(Absorb)的颜色（被拒绝的颜色）就是我们能够感知到的物体的颜色。
+
+![](/Users/nemoli/Downloads/light_reflection.png)
+
+
+
+```c
+glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+glm::vec3 toyColor(1.0f, 0.5f, 0.31f);
+glm::vec3 result = lightColor * toyColor; // = (1.0f, 0.5f, 0.31f);
+```
+
+##### opengl光照
+
+我们使用冯氏光照模型，分为环境光照，漫放射光照，镜面光照
+
+![](readme/flappy_theory.png)
+
+#### 碰撞
+
