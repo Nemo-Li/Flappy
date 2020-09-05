@@ -42,16 +42,13 @@ stb_image.h 是Sean Barrett的一个非常流行的单头文件图像加载库�
 
 在OpenGL中，由于某些原因我们通常使用**4×4**的变换矩阵，而其中最重要的原因就是大部分的向量都是4分量的。
 
-$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} 1}  & {\color{green} 0}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} 1} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$\left[\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \end{matrix}\right]$$ = $$\left[ \begin{matrix} {\color{red} 1} \cdot 1 \\ {\color{green} 1} \cdot 2 \\ {\color{blue} 1} \cdot 3 \\ {\color{purple} 1} \cdot 4 \end{matrix} \right]$$ = $$\left[ \begin{matrix} 1 \\ 2 \\ 3 \\ 4  \end{matrix} \right]$$ 
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}1}&{\color{red}0}&{\color{red}0}&{\color{red}0}\\{\color{green}0}&{\color{green}1}&{\color{green}0}&{\color{green}0}\\{\color{blue}0}&{\color{blue}0}&{\color{blue}1}&{\color{blue}0}\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left[\begin{matrix}1\\2\\3\\4\end{matrix}\right]=\left[\begin{matrix}{\color{red}1}\cdot1\\{\color{green}1}\cdot2\\{\color{blue}1}\cdot3\\{\color{yellow}1}\cdot4\end{matrix}\right]=\left[\begin{matrix}1\\2\\3\\4\end{matrix}\right])
 #### 缩放
 
-$$\left[ \begin{matrix} {\color{red} {S_1}} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} {S_2}}  & {\color{green} 0}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} {S_3}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$\left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right)$$ = $$\left( \begin{matrix} \color{red}{S_1} \cdot x \\ \color{green} {S_2} \cdot y \\ \color{blue}{S_3} \cdot z \\ 1  \end{matrix}\right)$$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}{S_1}}&{\color{red}0}&{\color{red}0}&{\color{red}0}\\{\color{green}0}&{\color{green}{S_2}}&{\color{green}0}&{\color{green}0}\\{\color{blue}0}&{\color{blue}0}&{\color{blue}{S_3}}&{\color{blue}0}\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\\z\\1\end{matrix}\right)=\left(\begin{matrix}\color{red}{S_1}\cdot x\\\color{green}{S_2}\cdot y\\\color{blue}{S_3}\cdot z\\1\end{matrix}\right))
 #### 位移
 
-$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} {T_x}} \\ {\color{green} 0} & {\color{green} 1}  & {\color{green} 0}  & {\color{green} {T_y}}  \\ {\color{blue} 0}  & {\color{blue} 0} & {\color{blue} 1} & {\color{blue} {T_z}} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $$ = $$\left( \begin{matrix} x + \color{red}{T_x} \\ y + \color{green} {T_y} \\  z + \color{blue}{T_z} \\ 1  \end{matrix}\right)$$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}1}&{\color{red}0}&{\color{red}0}&{\color{red}{T_x}}\\{\color{green}0}&{\color{green}1}&{\color{green}0}&{\color{green}{T_y}}\\{\color{blue}0}&{\color{blue}0}&{\color{blue}1}&{\color{blue}{T_z}}\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\\z\\1\end{matrix}\right)=\left(\begin{matrix}x+\color{red}{T_x}\\y+\color{green}{T_y}\\z+\color{blue}{T_z}\\1\end{matrix}\right))
 
 
 > **齐次坐标(Homogeneous Coordinates)**
@@ -72,31 +69,28 @@ $$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\
 
 对于标准的坐标系，向量基是$x(1,0)$,$y(0,1)$,在这个向量空间下，上图的P点可以如下表示
 
-$\left[ \begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix}\right]$ $\cdot$ $\left( \begin{matrix} x \\ y \end{matrix}\right)$ = $\left( \begin{matrix} x \\ y \end{matrix}\right)$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}1&0\\0&1\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\end{matrix}\right)=\left(\begin{matrix}x\\y\end{matrix}\right))
 发生了旋转，可以理解为整个坐标系旋转，也就是说是坐标基发生了旋转。这里我们逆时针旋转了$\theta$
 
 现在坐标基可以表示为$x(cos\theta, sin\theta), y(cos(90+\theta), sin(90 + \theta)) = y(-sin\theta, cos\theta)$
 
 同样，P点的坐标还是$(x,y)$,显然同样可以这样来表示这个点
 
-$\left[ \begin{matrix} cos\theta & sin\theta \\ -sin\theta & cos\theta \end{matrix} \right]$ $\cdot$ $\left( \begin{matrix} x \\ y \end{matrix}\right)$ = $\left( \begin{matrix} cos\theta x + sin\theta y \\ -sin\theta x + cos\theta y  \end{matrix} \right)$ 
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}cos\theta&sin\theta\\-sin\theta&cos\theta\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\end{matrix}\right)=\left(\begin{matrix}cos\theta x+sin\theta y\\-sin\theta x+cos\theta y\end{matrix}\right))
 ##### 下面上升到三维空间
 
 沿x轴旋转：
 
-$$\left[ \begin{matrix} {\color{red} 1} & {\color{red} 0} & {\color{red} 0} & {\color{red} 0} \\ {\color{green} 0} & {\color{green} {cos\theta}}  & {\color{green} {-sin\theta}}  & {\color{green} 0}  \\ {\color{blue} 0}  & {\color{blue} {sin\theta}} & {\color{blue} {cos\theta}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$ $$\cdot$$ $$ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $$ = $$\left( \begin{matrix} x  \\ \color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z  \\  \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z \\ 1  \end{matrix}\right)$$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}1}&{\color{red}0}&{\color{red}0}&{\color{red}0}\\{\color{green}0}&{\color{green}{cos\theta}}&{\color{green}{-sin\theta}}&{\color{green}0}\\{\color{blue}0}&{\color{blue}{sin\theta}}&{\color{blue}{cos\theta}}&{\color{blue}0}\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\\z\\1\end{matrix}\right)=\left(\begin{matrix}x\\\color{green}{cos\theta}\cdot y-\color{green}{sin\theta}\cdot z\\\color{blue}{sin\theta}\cdot y+\color{blue}{cos\theta}\cdot z\\1\end{matrix}\right))
 这里$x$不变，只有$y,z$坐标在变化，我们得到了计算变换后的$(y', z')$坐标
 
-$y'=\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z$
+![](http://latex.codecogs.com/gif.latex?y'=\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z)
 
-$z'= \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z$
+![](http://latex.codecogs.com/gif.latex?z'= \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z)
 
-$y'^2 + z'^2 = (\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z)^2 + ( \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z)^2$
+![](http://latex.codecogs.com/gif.latex?y'^2 + z'^2 = (\color{green} {cos\theta} \cdot y - \color{green}{sin\theta} \cdot z)^2 + ( \color{blue}{sin\theta} \cdot y + \color{blue}{cos\theta} \cdot z)^2)
 
-$= y^2 + z^2$
+![](http://latex.codecogs.com/gif.latex?= y^2 + z^2)
 
 从上面推导得到矩阵运算后$y,z$坐标的平方和不变，最终结论就是$y,z$坐标都在一个圆上，所以是绕x轴旋转，下面的矩阵变换同理可证
 
@@ -106,16 +100,14 @@ $= y^2 + z^2$
 
 沿y轴旋转：
 
-$\left[ \begin{matrix} {\color{red} {\color{red} {cos\theta}}} & {\color{red} 0} & {\color{red} {sin\theta}}& {\color{red} 0} \\ {\color{green} 0} & {\color{green} 1} &  {\color{green} 0} & {\color{green} 0}  \\ {\color{blue} {-sin\theta}}  & {\color{blue} 0} & {\color{blue} {cos\theta}} & {\color{blue} 0} \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $$\cdot$ $ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $ = $\left( \begin{matrix} \color{red} {cos\theta} \cdot x + \color{red}{sin\theta} \cdot z  \\ y  \\  \color{blue}{-sin\theta} \cdot x + \color{blue}{cos\theta} \cdot z \\ 1  \end{matrix}\right)$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}{\color{red}{cos\theta}}}&{\color{red}0}&{\color{red}{sin\theta}}&{\color{red}0}\\{\color{green}0}&{\color{green}1}&{\color{green}0}&{\color{green}0}\\{\color{blue}{-sin\theta}}&{\color{blue}0}&{\color{blue}{cos\theta}}&{\color{blue}0}\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\\z\\1\end{matrix}\right)=\left(\begin{matrix}\color{red}{cos\theta}\cdot x+\color{red}{sin\theta}\cdot z\\y\\\color{blue}{-sin\theta}\cdot x+\color{blue}{cos\theta}\cdot z\\1\end{matrix}\right))
 动图展示：
 
 ![](readme/y.gif)
 
 沿z轴旋转：
 
-$\left[ \begin{matrix} {\color{red} {\color{red} {cos\theta}}} & {\color{red} {-sin\theta}} & \color{red}0 & {\color{red} 0} \\ {\color{green} {sin\theta}}  & {\color{green} {cos\theta}} & {\color{green} 0}& {\color{green} 0} \\ {\color{blue} 0} &  {\color{blue} 0} & {\color{blue} 1}  & \color{blue} 0 \\ {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 0} & {\color{purple} 1} \end{matrix}\right] $ $\cdot$ $ \left( \begin{matrix}  x \\ y \\ z \\ 1 \end{matrix} \right) $ = $\left( \begin{matrix} \color{red} {cos\theta} \cdot x - \color{red}{sin\theta} \cdot y  \\  \color{green}{sin\theta} \cdot x + \color{green}{cos\theta} \cdot z  \\  z  \\ 1  \end{matrix}\right)$
-
+![](http://latex.codecogs.com/gif.latex?\left[\begin{matrix}{\color{red}{\color{red}{cos\theta}}}&{\color{red}{-sin\theta}}&\color{red}0&{\color{red}0}\\{\color{green}{sin\theta}}&{\color{green}{cos\theta}}&{\color{green}0}&{\color{green}0}\\{\color{blue}0}&{\color{blue}0}&{\color{blue}1}&\color{blue}0\\{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}0}&{\color{yellow}1}\end{matrix}\right]\cdot\left(\begin{matrix}x\\y\\z\\1\end{matrix}\right)=\left(\begin{matrix}\color{red}{cos\theta}\cdot x-\color{red}{sin\theta}\cdot y\\\color{green}{sin\theta}\cdot x+\color{green}{cos\theta}\cdot z\\z\\1\end{matrix}\right))
 动图展示：
 
 ![](readme/z.gif)
